@@ -34,8 +34,8 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Agentic AI Document Assistant",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
 # ============================================================================
@@ -44,101 +44,214 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    body, .stApp, .main {
-        background-color: #080808;
-        color: #f7f7f7;
-        font-family: 'Inter', sans-serif;
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
-    .app-shell {
-        background: transparent;
+    html, body {
+        background-color: #FFFFFF;
+        color: #111827;
     }
 
+    .stApp {
+        background-color: #FFFFFF;
+        color: #111827;
+    }
+
+    .main {
+        background-color: #FFFFFF;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .block-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    /* Typography */
+    p, span, div, label, small, strong, a, li {
+        color: #111827;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: #111827;
+    }
+
+    /* Card Styling */
     .section-card {
-        background: #111111;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 24px;
-        padding: 26px;
-        margin-bottom: 22px;
-    }
-
-    .section-header {
-        color: #ffffff;
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 0.35rem;
-    }
-
-    .section-subtitle {
-        color: #b3b3b3;
-        font-size: 1rem;
-        line-height: 1.7;
-        margin-bottom: 1.4rem;
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .result-card {
-        background: #141414;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 22px;
-        padding: 20px;
-        margin-top: 18px;
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Header and Title Styling */
+    .section-header {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+        line-height: 1.2;
     }
 
     .result-header {
-        color: #ffffff;
-        font-size: 1.1rem;
+        font-size: 18px;
         font-weight: 700;
-        margin-bottom: 15px;
+        color: #111827;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+        font-weight: 500;
+        color: #6B7280;
+        line-height: 1.5;
+        margin-bottom: 12px;
     }
 
     .secondary-text {
-        color: #9ca3af;
-        margin-bottom: 4px;
+        font-size: 14px;
+        color: #6B7280;
+        line-height: 1.5;
+        margin-bottom: 8px;
     }
 
-    .stButton>button,
-    .stDownloadButton>button {
-        width: 100%;
-        background-color: #c8102e;
-        color: #ffffff;
-        border: none;
-        border-radius: 999px;
-        padding: 0.95rem 1.3rem;
-        font-weight: 700;
-        font-size: 1rem;
+    /* Streamlit Components */
+    .stTextArea, .stTextArea textarea {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        border-radius: 8px !important;
+        color: #111827 !important;
     }
 
-    .stButton>button:hover,
-    .stDownloadButton>button:hover {
-        background-color: #a10a24;
+    .stTextArea textarea {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
     }
 
-    .stTextArea>div>div>textarea {
-        background: #0f0f0f;
-        color: #f7f7f7;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 18px;
-        padding: 14px;
+    .stTextArea textarea::placeholder {
+        color: #D1D5DB !important;
     }
 
-    .stFileUploader>div>div {
-        background: #111111;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 18px;
+    .stTextInput, .stTextInput input {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        border-radius: 8px !important;
+        color: #111827 !important;
     }
 
-    textarea:disabled {
-        color: #f7f7f7;
+    .stTextInput input::placeholder {
+        color: #D1D5DB !important;
     }
 
-    @media (max-width: 720px) {
-        .section-card {
-            padding: 22px;
+    .stFileUploader {
+        background-color: #FFFFFF !important;
+        border: 1px dashed #E5E7EB !important;
+        border-radius: 8px !important;
+    }
+
+    .stSelectbox {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        border-radius: 8px !important;
+    }
+
+    /* Button Styling */
+    .stButton>button, .stDownloadButton>button {
+        background-color: #DC2626 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 8px !important;
+        height: 40px !important;
+        padding: 12px 20px !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        width: auto !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .stButton>button:hover, .stDownloadButton>button:hover {
+        background-color: #B91C1C !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .stButton>button:active, .stDownloadButton>button:active {
+        background-color: #991B1B !important;
+    }
+
+    /* Alert Messages */
+    .stAlert {
+        background-color: #FFFFFF !important;
+        border-radius: 8px !important;
+        border: 1px solid #E5E7EB !important;
+        padding: 12px 16px !important;
+    }
+
+    .stAlert p {
+        color: #111827 !important;
+        font-size: 14px !important;
+    }
+
+    /* Markdown */
+    .stMarkdown {
+        color: #111827;
+    }
+
+    .stMarkdownContainer {
+        background-color: #FFFFFF;
+        color: #111827;
+    }
+
+    /* Expander */
+    .stExpander {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E5E7EB !important;
+        border-radius: 8px !important;
+    }
+
+    /* Spacing utilities */
+    .divider {
+        height: 1px;
+        background-color: #E5E7EB;
+        margin: 32px 0;
+    }
+
+    @media (max-width: 640px) {
+        .main {
+            padding: 24px 16px;
         }
 
-        .stButton>button,
-        .stDownloadButton>button {
-            min-height: 50px;
+        .section-card, .result-card {
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            font-size: 20px;
+        }
+
+        .result-header {
+            font-size: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
         }
     }
     </style>
@@ -370,7 +483,7 @@ def main():
         placeholder="Paste text here if no file is uploaded..."
     )
 
-    if st.button("Load Content", key="load_content", use_container_width=True):
+    if st.button("Load Content", key="load_content"):
         if uploaded_file is not None:
             process_document(uploaded_file.getvalue(), uploaded_file.name)
         elif st.session_state.input_text and st.session_state.input_text.strip():
@@ -396,23 +509,15 @@ def main():
         st.markdown(f"<div class='secondary-text'>Source: {st.session_state.filename}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='secondary-text'>Length: {len(st.session_state.document_text)} characters</div>", unsafe_allow_html=True)
 
-        st.markdown("""
-            <div class='section-card'>
-                <div class='section-header'>Agent Overview</div>
-                <div class='section-subtitle'>Run each agent in sequence and download the polished output immediately below the result.</div>
-                <div class='secondary-text'>Document Review, Summarization, and Information Extraction remain independent while preserving your existing workflow.</div>
-            </div>
-        """, unsafe_allow_html=True)
-
         # Document Review Section
         st.markdown("""
             <div class='section-card'>
-                <div class='section-header'>DOCUMENT REVIEW</div>
-                <div class='section-subtitle'>Professional document refinement in one clean result card.</div>
+                <div class='section-header'>Document Review</div>
+                <div class='section-subtitle'>Professional document refinement and improvement.</div>
             </div>
         """, unsafe_allow_html=True)
 
-        if st.button("Process Document Review", key="document_review", use_container_width=True):
+        if st.button("Process Document Review", key="document_review"):
             run_document_agent()
 
         if st.session_state.results["document_agent"]:
@@ -425,26 +530,25 @@ Changes Summary:
 """
             st.markdown("<div class='result-card'>", unsafe_allow_html=True)
             st.markdown("<div class='result-header'>Document Review Result</div>", unsafe_allow_html=True)
-            st.text_area("", value=combined_output, height=340, disabled=True)
+            st.text_area("", value=combined_output, height=340, disabled=False)
             st.markdown("</div>", unsafe_allow_html=True)
             st.download_button(
                 label="Download Improved Document",
                 data=create_download_data(combined_output),
                 file_name=f"improved_{st.session_state.filename}.txt",
                 mime="text/plain",
-                use_container_width=True,
                 key="download_improved_document"
             )
 
         # Summarization Section
         st.markdown("""
             <div class='section-card'>
-                <div class='section-header'>SUMMARIZATION</div>
-                <div class='section-subtitle'>A concise final summary suitable for presentation and viva review.</div>
+                <div class='section-header'>Summarization</div>
+                <div class='section-subtitle'>Generate a concise summary suitable for presentation.</div>
             </div>
         """, unsafe_allow_html=True)
 
-        if st.button("Generate Summary", key="generate_summary", use_container_width=True):
+        if st.button("Generate Summary", key="generate_summary"):
             run_summary_agent()
 
         if st.session_state.results["summary_agent"]:
@@ -452,26 +556,25 @@ Changes Summary:
             summary_text = result.get("executive_summary") or result.get("bullet_summary") or result.get("key_takeaways") or "No summary available."
             st.markdown("<div class='result-card'>", unsafe_allow_html=True)
             st.markdown("<div class='result-header'>Summary Result</div>", unsafe_allow_html=True)
-            st.text_area("", value=summary_text, height=320, disabled=True)
+            st.text_area("", value=summary_text, height=320, disabled=False)
             st.markdown("</div>", unsafe_allow_html=True)
             st.download_button(
                 label="Download Summary",
                 data=create_download_data(summary_text),
                 file_name=f"summary_{st.session_state.filename}.txt",
                 mime="text/plain",
-                use_container_width=True,
                 key="download_summary"
             )
 
         # Information Extraction Section
         st.markdown("""
             <div class='section-card'>
-                <div class='section-header'>INFORMATION EXTRACTION</div>
-                <div class='section-subtitle'>Combined entities, dates, actions, and distribution insights in one view.</div>
+                <div class='section-header'>Information Extraction</div>
+                <div class='section-subtitle'>Extract entities, dates, actions, and key information.</div>
             </div>
         """, unsafe_allow_html=True)
 
-        if st.button("Extract Information", key="extract_information", use_container_width=True):
+        if st.button("Extract Information", key="extract_information"):
             run_info_agent()
 
         if st.session_state.results["info_agent"]:
@@ -497,15 +600,14 @@ Distribution Report:
                 data=create_download_data(combined_output),
                 file_name=f"info_report_{st.session_state.filename}.txt",
                 mime="text/plain",
-                use_container_width=True,
                 key="download_information_report"
             )
 
         # Export Section
         st.markdown("""
             <div class='section-card'>
-                <div class='section-header'>EXPORT</div>
-                <div class='section-subtitle'>Download a single combined report for presentations and viva demonstrations.</div>
+                <div class='section-header'>Export</div>
+                <div class='section-subtitle'>Download a complete report combining all results.</div>
             </div>
         """, unsafe_allow_html=True)
 
@@ -514,7 +616,6 @@ Distribution Report:
             data=create_download_data(build_combined_report()),
             file_name=f"complete_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
             mime="text/plain",
-            use_container_width=True,
             key="download_all_results"
         )
 

@@ -35,8 +35,7 @@ class InfoAgent:
 
         self.openrouter_models = [
             "deepseek/deepseek-r1:free",
-            "deepseek/deepseek-chat-v3:free",
-            "meta-llama/llama-3.3-8b-instruct:free"
+            "deepseek/deepseek-chat-v3-0324:free"
         ]
 
     def process_document(self, document_text: str) -> dict:
@@ -53,6 +52,8 @@ class InfoAgent:
             prompts = get_info_agent_prompt(document_text)
 
             response = None
+            api_used = None
+
             if self.api_key:
                 try:
                     response = self._call_openrouter(
@@ -61,9 +62,9 @@ class InfoAgent:
                     )
                     api_used = "openrouter"
                 except Exception as openrouter_error:
-                    response = None
                     if not self.gemini_key:
                         raise openrouter_error
+                    response = None
 
             if response is None and self.gemini_key:
                 response = self._call_gemini(
