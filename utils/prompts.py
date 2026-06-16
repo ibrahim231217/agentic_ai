@@ -30,6 +30,7 @@ Provide:
 3. Key improvements in writing quality
 
 Format your response as:
+
 --- IMPROVED DOCUMENT ---
 [corrected document here]
 
@@ -76,14 +77,15 @@ INFO_AGENT_SYSTEM = """You are an expert information extraction and organization
 1. Extract structured information from documents
 2. Identify key entities and concepts
 3. Organize findings systematically
-4. Present data clearly for distribution
+4. Present findings clearly for distribution
 
 Focus on:
-- Important entities (people, organizations, locations, etc.)
+- Important entities (people, organizations, locations, concepts)
+- Dates and deadlines
 - Action items and tasks
-- Key metrics and data points
-- Relationships and connections
-- Structured information presentation"""
+- Key facts and metrics
+- Categorized information
+- Distribution-ready summaries"""
 
 
 INFO_AGENT_TASK = """Please extract and organize information from the following document:
@@ -91,27 +93,31 @@ INFO_AGENT_TASK = """Please extract and organize information from the following 
 {document_text}
 
 Provide:
-1. Important Entities - Names, organizations, locations mentioned
-2. Action Items - Tasks or recommendations
-3. Key Data Points - Numbers, metrics, dates
-4. Categorized Information - Organize findings by topic
-5. Distribution-Ready Summary - A structured report format
+1. Important Entities - Names, organizations, locations, and concepts
+2. Dates and Deadlines - Any dates, deadlines, or schedule items
+3. Action Items - Tasks, recommendations, or next steps
+4. Key Facts - Important findings, metrics, and data points
+5. Categorized Information - Organize findings by topic
+6. Distribution Report - A structured summary suitable for sharing
 
 Format your response as:
 
 --- IMPORTANT ENTITIES ---
 [entities here]
 
+--- DATES AND DEADLINES ---
+[dates and deadlines here]
+
 --- ACTION ITEMS ---
 [action items here]
 
---- KEY DATA POINTS ---
-[data points here]
+--- KEY FACTS ---
+[key facts here]
 
 --- CATEGORIZED INFORMATION ---
 [organized information here]
 
---- DISTRIBUTION-READY REPORT ---
+--- DISTRIBUTION REPORT ---
 [report format here]"""
 
 
